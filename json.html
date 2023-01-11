@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <div id="employees"></div> -->
+    <div>
+      <form action="">
+        <select
+          name="select-employees"
+          id="select-employees"
+          onchange="getEmployee()"
+        ></select>
+      </form>
+    </div>
+
+    <div id="employee">Pick an employee in the dropdown</div>
+
+    <script>
+      let city = '{"name":"Amersfoort","residents":152000}';
+      let cityObject = JSON.parse(city);
+
+      console.log(cityObject);
+      console.log(cityObject.name);
+      console.log(cityObject["residents"]);
+
+      let employeeJSON = `
+      {
+        "employees":
+        [
+            {"id":1, "name":"John", "age":30, "city":"Amsterdam"},
+            {"id":2, "name":"Pieter", "age":32, "city":"Spijkenisse"},
+            {"id":3, "name":"Carla", "age":22, "city":"Almere"},
+            {"id":4, "name":"Robbbbbert", "age":26, "city":"Leiden"}
+
+        ]
+      }
+      `;
+
+      employeeObj = JSON.parse(employeeJSON);
+
+      console.log(employeeObj.employees[2].age);
+
+      employeesHTML = "";
+
+      for (let x = 0; x < employeeObj.employees.length; x++) {
+        console.log(employeeObj.employees[x]);
+        employeesHTML += `
+        <div>
+            <h4>${employeeObj.employees[x].name}</h4>
+            <p>Age: ${employeeObj.employees[x].age}</p>
+            <p>City: ${employeeObj.employees[x].city}</p>
+        </div>
+        `;
+      }
+
+      //   document.getElementById("employees").innerHTML = employeesHTML;
+
+      window.onload = function () {
+        let employeeObj = JSON.parse(employeeJSON);
+        let optionsHTML = "";
+        for (let x = 0; x < employeeObj.employees.length; x++) {
+          optionsHTML += `
+          <option value="${employeeObj.employees[x].id}">${employeeObj.employees[x].name}</option>
+          `;
+        }
+        document.getElementById("select-employees").innerHTML += optionsHTML;
+      };
+
+      function getEmployee() {
+        let employeeId = document.getElementById("select-employees").value;
+
+        let employeeObj = JSON.parse(employeeJSON);
+
+        let employee = employeeObj.employees.filter(function (item) {
+          return item.id == employeeId;
+        });
+        document.getElementById("employee").innerHTML = `
+        <div>
+            <h4>${employee[0].name}</h4>
+            <p>Age: ${employee[0].age}</p>
+            <p>City: ${employee[0].city}</p>
+        </div>
+        `;
+      }
+    </script>
+  </body>
+</html>

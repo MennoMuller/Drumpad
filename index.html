@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drumpad</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>let's play some music <span id="name"></span></h1>
+        <a onclick="changeName()">change my name</a>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <h3>Choose your sound</h3>
+        <div class="set-box">
+          <button class="set-button inactive" id="punk-rock">Punk Rock</button>
+          <button class="set-button" id="smooth-jazz">Smooth Jazz</button>
+          <button class="set-button inactive" id="hip-hop">Hip Hop</button>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Smooth Jazz</h2>
+        <div class="grid">
+          <button class="sound" id="q-button" onclick="playSound('q')">
+            Q
+          </button>
+          <button class="sound" id="w-button" onclick="playSound('w')">
+            W
+          </button>
+          <button class="sound" id="e-button" onclick="playSound('e')">
+            E
+          </button>
+          <button class="sound" id="a-button" onclick="playSound('a')">
+            A
+          </button>
+          <button class="sound" id="s-button" onclick="playSound('s')">
+            S
+          </button>
+          <button class="sound" id="d-button" onclick="playSound('d')">
+            D
+          </button>
+          <button class="sound" id="z-button" onclick="playSound('z')">
+            Z
+          </button>
+          <button class="sound" id="x-button" onclick="playSound('x')">
+            X
+          </button>
+          <button class="sound" id="c-button" onclick="playSound('c')">
+            C
+          </button>
+        </div>
+      </div>
+    </main>
+    <script>
+      const setA = [
+        "Set A",
+        {
+          button: "q",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "w",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "e",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "a",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "s",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "d",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "z",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "x",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "c",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+      ];
+
+      const setB = [
+        "Set B",
+        {
+          button: "q",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "w",
+          soundLink: new Audio("audio/Acoustic Snare-04.wav"),
+          color: "blue",
+          gradientColor: "rgba(0, 0, 255, 0.35)",
+        },
+        {
+          button: "e",
+          soundLink: new Audio("audio/CYCdh_MultiCrash-01.wav"),
+          color: "orange",
+          gradientColor: "rgba(255, 165, 0, 0.35)",
+        },
+        {
+          button: "a",
+          soundLink: new Audio("audio/CYCdh_K1close_PdHat-04.wav"),
+          color: "orange",
+          gradientColor: "rgba(255, 165, 0, 0.35)",
+        },
+        {
+          button: "s",
+          soundLink: new Audio("audio/CYCdh_K1close_SdSt-03.wav"),
+          color: "blue",
+          gradientColor: "rgba(0, 0, 255, 0.35)",
+        },
+        {
+          button: "d",
+          soundLink: new Audio("audio/CYCdh_K1close_Rim-02.wav"),
+          color: "blue",
+          gradientColor: "rgba(0, 0, 255, 0.35)",
+        },
+        {
+          button: "z",
+          soundLink: new Audio("audio/CYCdh_K1close_Flam-05.wav"),
+          color: "blue",
+          gradientColor: "rgba(0, 0, 255, 0.35)",
+        },
+        {
+          button: "x",
+          soundLink: new Audio("audio/CYCdh_AcouKick-02.wav"),
+          color: "red",
+          gradientColor: "rgba(255, 0, 0, 0.35)",
+        },
+        {
+          button: "c",
+          soundLink: new Audio("audio/CYCdh_K1close_OpHat-05.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+      ];
+      const setC = [
+        "Set C",
+        {
+          button: "q",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "w",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "e",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "a",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "s",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "d",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "z",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "x",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+        {
+          button: "c",
+          soundLink: new Audio("audio/Acoustic Hat-02.wav"),
+          color: "yellow",
+          gradientColor: "rgba(255, 255, 0, 0.35)",
+        },
+      ];
+
+      let selection = setB;
+
+      const soundButtons = document.getElementsByClassName("sound");
+
+      function changeName() {
+        const nameElement = document.getElementById("name");
+        const newName = prompt("What is your name?", nameElement.innerText);
+        if (newName.length > 0) {
+          nameElement.innerText = newName;
+          document.cookie = `username = ${newName}`;
+        }
+      }
+
+      function playSound(key) {
+        let soundObject = selection.find((x) => x.button == key);
+        let soundButton = document.getElementById(key + "-button");
+        soundButton.style.backgroundColor = soundObject.color;
+        document.body.style.backgroundImage = `radial-gradient(circle closest-side, ${soundObject.gradientColor}, black)`;
+        soundObject.soundLink.play();
+        setTimeout(() => {
+          soundButton.style.removeProperty("background-color");
+          //   document.body.style.removeProperty("background-image");
+        }, soundObject.soundLink.duration * 1000);
+      }
+
+      function switchLooks(button) {
+        const buttonLetter = button.innerText.toLowerCase();
+        console.log(buttonLetter);
+        let soundObject = selection.find((x) => x.button == buttonLetter);
+        console.log(soundObject);
+        button.style.backgroundImage =
+          "radial-gradient(" +
+          soundObject.color +
+          "," +
+          soundObject.gradientColor +
+          ")";
+      }
+
+      function switchSoundSet(set) {
+        switch (set) {
+          case "set-a":
+            selection = setA;
+            break;
+          case "set-b":
+            selection = setB;
+            break;
+          case "set-c":
+            selection = setC;
+            break;
+        }
+        for (let x = 0; x < soundButtons.length; x++) {
+          switchLooks(soundButtons[x]);
+        }
+      }
+
+      function getCookie(key) {
+        console.log("in get cookie");
+        let name = key + "="; //username=
+        let ca = document.cookie.split(";"); // split de cookies in een array
+        for (let x = 0; x < ca.length; x++) {
+          // loop door de array met cookies
+          let c = ca[x]; // haal de cookie die aan de beurt is bv: (spatie)username=Kees
+          console.log(c); // (spatie)username=Kees
+          while (c.charAt(0) == " ") {
+            // haal spaties weg
+            c = c.substring(1);
+            console.log(c); // username=Kees
+          }
+          if (c.indexOf(name) == 0) {
+            console.log(c.substring(name.length, c.length)); // Kees
+            return c.substring(name.length, c.length); // name.length is username= (9 tekens)
+          }
+        }
+        return "";
+      }
+
+      for (let x = 0; x < soundButtons.length; x++) {
+        let button = soundButtons[x];
+        button.addEventListener("mouseover", function () {
+          const buttonLetter = this.innerText.toLowerCase;
+          let soundObject = selection.find((x) => x.button == buttonLetter);
+          this.style.backgroundColor = soundObject.gradientColor;
+        });
+        button.addEventListener("mouseout", function () {
+          this.style.removeProperty("background-color");
+        });
+        switchLooks(button);
+      }
+
+      window.addEventListener("load", function () {
+        console.log("page is fully loaded");
+        console.log(document.cookie);
+        let name = getCookie("username");
+        console.log(name);
+        if (name != "") {
+          document.getElementById("name").innerHTML = name;
+        }
+      });
+
+      window.addEventListener("keydown", function (event) {
+        if ("qweasdzxc".includes(event.key.toString().toLowerCase())) {
+          playSound(event.key.toString().toLowerCase());
+        }
+      });
+    </script>
+  </body>
+</html>
